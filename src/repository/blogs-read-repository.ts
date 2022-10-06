@@ -1,6 +1,6 @@
-import { BlogInputModel, BlogViewModel, IObject, Paginator, searchNameTerm, SortDirectionType } from '../types/types.js';
-import DataService from '../services/data-service.js';
-import mongoDbAdapter from '../adapters/mongoDb-adapter.js';
+import { BlogInputModel, BlogViewModel, IObject, Paginator, searchNameTerm, SortDirectionType } from '../types/types';
+import DataService from '../services/data-service';
+import mongoDbAdapter from '../adapters/mongoDb-adapter';
 
 const dataService = new DataService(mongoDbAdapter)
 

@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-import blogsReadService from '../repository/blogs-read-repository.js';
+import blogsReadService from '../repository/blogs-read-repository';
 
 
 export const blogidParamValidationMiddleware = body('blogId')

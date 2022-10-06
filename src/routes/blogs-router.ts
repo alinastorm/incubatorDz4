@@ -1,20 +1,20 @@
 import { Express } from 'express';
-import blogsController from "../controllers/blogs-controller.js"
-import { nameBodyValidationMiddleware } from '../middlewares/name-validation-middleware.js';
-import { youtubeUrlBodyValidationMiddleware } from '../middlewares/youtubeUrl-validation-middleware.js';
-import { idParamValidationMiddleware } from '../middlewares/id-validation-middleware.js';
-import { authorizationBasicMiddleware } from '../middlewares/authorization-validation-middleware.js';
+import blogsController from "../controllers/blogs-controller";
+import { nameBodyValidationMiddleware } from '../middlewares/name-validation-middleware';
+import { youtubeUrlBodyValidationMiddleware } from '../middlewares/youtubeUrl-validation-middleware';
+import { idParamValidationMiddleware } from '../middlewares/id-validation-middleware';
+import { authorizationBasicMiddleware } from '../middlewares/authorization-validation-middleware';
 
-import { checkValidationMiddleware } from '../middlewares/checkValidation-middleware.js';
-import { searchNameTermQueryValidationMiddleware } from '../middlewares/searchNameTerm-validation-middleware.js';
-import { pageNumberQueryValidationMiddleware } from '../middlewares/pageNumber-validation-middleware.js';
-import { sortByBlogsQueryValidationMiddleware } from '../middlewares/sortByBlogs-validation-middleware.js';
-import { pageSizeQueryValidationMiddleware } from '../middlewares/pageSize-validation-middleware.js';
-import { sortDirectionQueryValidationMiddleware } from '../middlewares/sortDirection-validation-middleware.js';
-import { blogIdParamUriValidationMiddleware } from '../middlewares/blogId-param-validation-middleware.js';
-import { titleBodyValidationMiddleware } from '../middlewares/title-validation-middleware.js';
-import { shortdescriptionBodyValidationMiddleware } from '../middlewares/shortdescription-validation-middleware.js';
-import { contentBodyValidationMiddleware } from '../middlewares/content-validation-middleware.js';
+import { checkValidationMiddleware } from '../middlewares/checkValidation-middleware';
+import { searchNameTermQueryValidationMiddleware } from '../middlewares/searchNameTerm-validation-middleware';
+import { pageNumberQueryValidationMiddleware } from '../middlewares/pageNumber-validation-middleware';
+import { sortByBlogsQueryValidationMiddleware } from '../middlewares/sortByBlogs-validation-middleware';
+import { pageSizeQueryValidationMiddleware } from '../middlewares/pageSize-validation-middleware';
+import { sortDirectionQueryValidationMiddleware } from '../middlewares/sortDirection-validation-middleware';
+import { blogIdParamUriValidationMiddleware } from '../middlewares/blogId-param-validation-middleware';
+import { titleBodyValidationMiddleware } from '../middlewares/title-validation-middleware';
+import { shortdescriptionBodyValidationMiddleware } from '../middlewares/shortdescription-validation-middleware';
+import { contentBodyValidationMiddleware } from '../middlewares/content-validation-middleware';
 
 
 

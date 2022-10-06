@@ -1,8 +1,8 @@
 import express from 'express';
-import bodyParser from 'body-parser'
-import blogsRouting from '../routes/blogs-router.js';
-import postsRouting from '../routes/posts-router.js';
-import testingRouting from '../routes/testing-router.js';
+import bodyParser from 'body-parser';
+import blogsRouting from '../routes/blogs-router';
+import postsRouting from '../routes/posts-router';
+import testingRouting from '../routes/testing-router';
 
 class HttpService {
     httpServer = express()

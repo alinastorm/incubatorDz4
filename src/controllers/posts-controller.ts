@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import blogsService from '../repository/blogs-write-repository.js';
-import postsReadRepository from '../repository/posts-read-repository.js';
-import postsWriteRepository from '../repository/posts-write-repository.js';
-import { HTTP_STATUSES, Paginator, PostInputModel, PostViewModel, RequestWithBody, RequestWithParams, RequestWithParamsBody, RequestWithQuery } from '../types/types.js';
+import blogsService from '../repository/blogs-write-repository';
+import postsReadRepository from '../repository/posts-read-repository';
+import postsWriteRepository from '../repository/posts-write-repository';
+import { HTTP_STATUSES, Paginator, PostInputModel, PostViewModel, RequestWithBody, RequestWithParams, RequestWithParamsBody, RequestWithQuery } from '../types/types';
 
 
 class Controller {

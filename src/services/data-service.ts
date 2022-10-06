@@ -1,4 +1,4 @@
-import { AdapterType, IObject, searchNameTerm, SortDirectionType } from "../types/types.js"
+import { AdapterType, IObject, searchNameTerm, SortDirectionType } from "../types/types"
 
 
 class DataService implements AdapterType {

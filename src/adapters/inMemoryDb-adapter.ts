@@ -1,4 +1,4 @@
-import { IObject } from "../types/types.js";
+import { IObject } from "../types/types";
 
 
 class DbInMemory {

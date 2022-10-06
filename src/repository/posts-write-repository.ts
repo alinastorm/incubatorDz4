@@ -1,8 +1,8 @@
-import { PostInputModel, PostViewModel } from '../types/types.js';
-import DataService from '../services/data-service.js';
-import dbMongoService from '../adapters/mongoDb-adapter.js';
-import blogsWriteRepository from './blogs-write-repository.js';
-import blogsReadRepository from './blogs-read-repository.js';
+import { PostInputModel, PostViewModel } from '../types/types';
+import DataService from '../services/data-service';
+import dbMongoService from '../adapters/mongoDb-adapter';
+import blogsWriteRepository from './blogs-write-repository';
+import blogsReadRepository from './blogs-read-repository';
 
 
 const dataService = new DataService(dbMongoService)

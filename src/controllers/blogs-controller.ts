@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 
 
-import blogsWriteService from '../repository/blogs-write-repository.js';
-import blogsReadRepository from '../repository/blogs-read-repository.js';
-import { BlogInputModel, BlogViewModel, HTTP_STATUSES, Paginator, PostViewModel, RequestWithBody, RequestWithParamsQuery, RequestWithParams, RequestWithQuery, RequestWithParamsQueryBody, RequestWithParamsBody, BlogPostInputModel, PostInputModel } from '../types/types.js';
-import postsReadRepository from '../repository/posts-read-repository.js';
-import blogsWriteRepository from '../repository/blogs-write-repository.js';
-import postsWriteRepository from '../repository/posts-write-repository.js';
+import blogsWriteService from '../repository/blogs-write-repository';
+import blogsReadRepository from '../repository/blogs-read-repository';
+import { BlogInputModel, BlogViewModel, HTTP_STATUSES, Paginator, PostViewModel, RequestWithBody, RequestWithParamsQuery, RequestWithParams, RequestWithQuery, RequestWithParamsQueryBody, RequestWithParamsBody, BlogPostInputModel, PostInputModel } from '../types/types';
+import postsReadRepository from '../repository/posts-read-repository';
+import blogsWriteRepository from '../repository/blogs-write-repository';
+import postsWriteRepository from '../repository/posts-write-repository';
 
 
 class Controller {

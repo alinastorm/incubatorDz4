@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import blogsRepository from '../repository/blogs-write-repository.js';
-import postsRepository from '../repository/posts-write-repository.js';
-import { HTTP_STATUSES } from '../types/types.js';
+import blogsRepository from '../repository/blogs-write-repository';
+import postsRepository from '../repository/posts-write-repository';
+import { HTTP_STATUSES } from '../types/types';
 
 
 class Controller {

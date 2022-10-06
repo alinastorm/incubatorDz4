@@ -1,19 +1,19 @@
 import { Express } from 'express';
-import postsController from "../controllers/posts-controller.js"
-import { titleBodyValidationMiddleware } from '../middlewares/title-validation-middleware.js';
-import { idParamValidationMiddleware } from '../middlewares/id-validation-middleware.js';
-import { contentBodyValidationMiddleware } from '../middlewares/content-validation-middleware.js';
-import { shortdescriptionBodyValidationMiddleware } from '../middlewares/shortdescription-validation-middleware.js';
-import { schemaPostsValidationMiddleware } from '../middlewares/schemaPosts-validation-middleware.js';
-import { authorizationBasicMiddleware } from '../middlewares/authorization-validation-middleware.js';
-import { bodyPostsSanitizeValidationMiddleware } from '../middlewares/bodyPostsSanitize-validation-middleware.js';
-import { checkValidationMiddleware } from '../middlewares/checkValidation-middleware.js';
-import { pageNumberQueryValidationMiddleware } from '../middlewares/pageNumber-validation-middleware.js';
-import { pageSizeQueryValidationMiddleware } from '../middlewares/pageSize-validation-middleware.js';
-import { sortByBlogsQueryValidationMiddleware } from '../middlewares/sortByBlogs-validation-middleware.js';
-import { sortByPostsQueryValidationMiddleware } from '../middlewares/sortByPosts-validation-middleware.js';
-import { sortDirectionQueryValidationMiddleware } from '../middlewares/sortDirection-validation-middleware.js';
-import { blogIdBodyValidationMiddleware } from '../middlewares/blogId-body-validation-middleware.js';
+import postsController from "../controllers/posts-controller"
+import { titleBodyValidationMiddleware } from '../middlewares/title-validation-middleware';
+import { idParamValidationMiddleware } from '../middlewares/id-validation-middleware';
+import { contentBodyValidationMiddleware } from '../middlewares/content-validation-middleware';
+import { shortdescriptionBodyValidationMiddleware } from '../middlewares/shortdescription-validation-middleware';
+import { schemaPostsValidationMiddleware } from '../middlewares/schemaPosts-validation-middleware';
+import { authorizationBasicMiddleware } from '../middlewares/authorization-validation-middleware';
+import { bodyPostsSanitizeValidationMiddleware } from '../middlewares/bodyPostsSanitize-validation-middleware';
+import { checkValidationMiddleware } from '../middlewares/checkValidation-middleware';
+import { pageNumberQueryValidationMiddleware } from '../middlewares/pageNumber-validation-middleware';
+import { pageSizeQueryValidationMiddleware } from '../middlewares/pageSize-validation-middleware';
+import { sortByBlogsQueryValidationMiddleware } from '../middlewares/sortByBlogs-validation-middleware';
+import { sortByPostsQueryValidationMiddleware } from '../middlewares/sortByPosts-validation-middleware';
+import { sortDirectionQueryValidationMiddleware } from '../middlewares/sortDirection-validation-middleware';
+import { blogIdBodyValidationMiddleware } from '../middlewares/blogId-body-validation-middleware';
 
 const mainRoute = 'posts'
 export default function setRoutes(app: Express) {

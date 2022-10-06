@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import testingController from "../controllers/testing-controller.js"
+import testingController from "../controllers/testing-controller"
 
 export default function setRoutes(app: Express) {
     //Testing
