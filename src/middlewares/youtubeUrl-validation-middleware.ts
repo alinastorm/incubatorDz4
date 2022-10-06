@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
-export const youtubeUrlValidationMiddleware = body('youtubeUrl')
+export const youtubeUrlBodyValidationMiddleware = body('youtubeUrl')
     .exists()
     .notEmpty({ ignore_whitespace: true })
     .isString()

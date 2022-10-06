@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { APIErrorResult, FieldError } from '../types/types';
 
-export const checkValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const checkValidationMiddleware = (req: any, res: Response, next: NextFunction) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

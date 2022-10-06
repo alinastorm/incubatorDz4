@@ -1,6 +1,6 @@
 import { param } from 'express-validator';
 
-export const idValidationMiddleware = param('id')
+export const idParamValidationMiddleware = param('id')
     .exists()
     .isLength({ max: "6339ea2f3c36ccbfa13f5665".length })
 

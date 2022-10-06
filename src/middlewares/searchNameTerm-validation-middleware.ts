@@ -1,10 +1,10 @@
 import { query } from 'express-validator';
 
-export const searchNameTermValidationMiddleware = query('searchNameTerm')
-    .exists()
-    .notEmpty({ ignore_whitespace: true })
+export const searchNameTermQueryValidationMiddleware = query('searchNameTerm')
     .isString()
     .isLength({ max: 30 })
-    .optional()
-    
+    .notEmpty({ ignore_whitespace: true })
+    .default(null)
+    .exists()
+
     // .withMessage({ message: 'wrong title', field: "title", code: 400 })

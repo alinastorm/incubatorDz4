@@ -1,4 +1,4 @@
-import { PostInputModel, PostViewModel } from '../types/types.js';
+import { IObject, Paginator, PostInputModel, PostViewModel, searchNameTerm } from '../types/types.js';
 import DataService from '../services/data-service.js';
 import dbMongoService from '../adapters/mongoDb-adapter.js';
 import blogsWriteRepository from './blogs-write-repository.js';
@@ -15,35 +15,29 @@ class Service {
         const result: PostViewModel[] = await dataService.readAll(this.collection)
         return result
     }
-    async createOne(data: PostInputModel) {
-        const { name } = await blogsReadRepository.readOne(data.blogId)
-        const element: PostViewModel = {
-            ...data,
-            blogName: name,
-            createdAt: new Date().toISOString()
-        }
-        const id: string = await dataService.createOne(this.collection, element)
-        const result: PostViewModel = await dataService.readOne(this.collection, id)
+    async readAllWithPaginationAndSort(pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1) {
+        const result: Paginator<PostViewModel> = await dataService.readAllOrByPropPaginationSort(
+            this.collection,
+            pageNumber,
+            pageSize,
+            sortBy,
+            sortDirection
+        )
+        return result
+    }
+    async readAllPostsByBlogIdWithPaginationAndSort(pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1, blogId: string) {
+        const result: Paginator<PostViewModel> = await dataService.readAllOrByPropPaginationSort(
+            this.collection,
+            pageNumber,
+            pageSize,
+            sortBy,
+            sortDirection,
+            { search: { blogId }, strict: true }
+        )
         return result
     }
     async readOne(id: string) {
         const result: PostViewModel = await dataService.readOne(this.collection, id)
-        return result
-    }
-    async updateOne(id: string, data: Partial<PostViewModel>) {
-        const result = await dataService.updateOne(this.collection, id, data)
-        return result
-    }
-    async replaceOne(id: string, data: PostViewModel) {
-        const result = await dataService.replaceOne(this.collection, id, data)
-        return result
-    }
-    async deleteOne(id: string) {
-        const result = await dataService.deleteOne(this.collection, id)
-        return result
-    }
-    async deleteAll() {
-        const result = await dataService.deleteAll(this.collection)
         return result
     }
 }

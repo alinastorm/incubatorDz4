@@ -12,10 +12,7 @@ class Service {
 
     constructor(private collection: string) { }
 
-    async readAll() {
-        const result: PostViewModel[] = await dataService.readAll(this.collection)
-        return result
-    }
+
     async createOne(data: PostInputModel) {
         const { name } = await blogsReadRepository.readOne(data.blogId)
         const element: PostViewModel = {
@@ -24,10 +21,6 @@ class Service {
             createdAt: new Date().toISOString()
         }
         const id: string = await dataService.createOne(this.collection, element)
-        const result: PostViewModel = await dataService.readOne(this.collection, id)
-        return result
-    }
-    async readOne(id: string) {
         const result: PostViewModel = await dataService.readOne(this.collection, id)
         return result
     }

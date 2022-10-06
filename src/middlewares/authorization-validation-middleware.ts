@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 
-export const authorizationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authorizationBasicMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
     const auth = { login: 'admin', password: 'qwerty' }
     const isBasicAuthorization = req.headers.authorization?.split(' ')[0] === "Basic"

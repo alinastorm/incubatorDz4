@@ -1,61 +1,71 @@
 import { Request, Response } from 'express';
 import blogsService from '../repository/blogs-write-repository.js';
-import postsService from '../repository/posts-read-repository.js';
-import { HTTP_STATUSES } from '../types/types.js';
+import postsReadRepository from '../repository/posts-read-repository.js';
+import postsWriteRepository from '../repository/posts-write-repository.js';
+import { HTTP_STATUSES, Paginator, PostInputModel, PostViewModel, RequestWithBody, RequestWithParams, RequestWithParamsBody, RequestWithQuery } from '../types/types.js';
 
 
 class Controller {
 
     async readAll(req: Request, res: Response) {
-        const result = await postsService.readAll()
+        const result = await postsReadRepository.readAll()
         res.status(HTTP_STATUSES.OK_200).send(JSON.stringify(result))
     }
-    async createOne(req: Request, res: Response) {
-        const body = req.body   
-        const result = await postsService.createOne(body)       
+    async readAllPaginationSort(
+        req: RequestWithQuery<{ pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1 }>,
+        res: Response<Paginator<PostViewModel>>
+    ) {
+        const { pageNumber, pageSize, sortBy, sortDirection } = req.query
+        const result = await postsReadRepository.readAllWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection)
+        res.status(HTTP_STATUSES.OK_200).json(result)
+    }
+
+
+    async createOne(req: RequestWithBody<PostInputModel>, res: Response<PostViewModel>) {
+        const body = req.body
+        const result = await postsWriteRepository.createOne(body)
         res.status(HTTP_STATUSES.CREATED_201).send(result)
     }
-    async readOne(req: Request, res: Response) {
+    async readOne(req: RequestWithParams<{ id: string }>, res: Response<PostViewModel>) {
         const id = req.params.id
-        const result = await postsService.readOne(id)
+        const result = await postsReadRepository.readOne(id)
         if (!result) {
-            return res.status(HTTP_STATUSES.NOT_FOUND_404).send('Not Found')
+            return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         }
         res.status(HTTP_STATUSES.OK_200).send(result)
     }
-    async updateOne(req: Request, res: Response) {
-        const body = req.body
+    async updateOne(req: RequestWithParamsBody<{ id: string }, PostInputModel>, res: Response) {
+        const data = req.body
         const id = req.params.id
-        const result = await postsService.readOne(id)
+        const result = await postsReadRepository.readOne(id)
         if (!result) {
-            return res.status(HTTP_STATUSES.NOT_FOUND_404).send('Not Found')
+            return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         }
-        await postsService.updateOne(id, body)
+        await postsWriteRepository.updateOne(id, data)
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
     async replaceOne(req: Request, res: Response) {
         const body = req.body
         const id = req.params.id
-        const result = await postsService.readOne(id)
+        const result = await postsReadRepository.readOne(id)
         if (!result) {
-            return res.status(HTTP_STATUSES.NOT_FOUND_404).send('Not Found')
+            return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         }
-        await postsService.replaceOne(id, body)
+        await postsWriteRepository.replaceOne(id, body)
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
-    async deleteOne(req: Request, res: Response) {
-        const body = req.body
+    async deleteOne(req: RequestWithParams<{ id: string }>, res: Response) {       
         const id = req.params.id
-        const result = await postsService.readOne(id)
+        const result = await postsReadRepository.readOne(id)
         if (!result) {
-            return res.status(HTTP_STATUSES.NOT_FOUND_404).send('Not Found')
+            return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         }
-        await postsService.deleteOne(id)
+        await postsWriteRepository.deleteOne(id)
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
     async deleteAll(req: Request, res: Response) {
-        await postsService.deleteAll()
-        res.status(HTTP_STATUSES.NO_CONTENT_204).send(JSON.stringify('All data is deleted'))
+        await postsWriteRepository.deleteAll()
+        res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
 }
 export default new Controller()

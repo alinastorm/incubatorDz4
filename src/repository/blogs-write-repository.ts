@@ -9,7 +9,7 @@ class Service {
 
     constructor(private collection: string) { }
 
- 
+
     async createOne(data: BlogInputModel) {
         const element: BlogViewModel = {
             ...data,
@@ -18,8 +18,8 @@ class Service {
         const id: string = await dataService.createOne(this.collection, element)
         const result: BlogViewModel = await dataService.readOne(this.collection, id)
         return result
-    }   
- 
+    }
+
     async updateOne(id: string, data: Partial<BlogViewModel>) {
         const result = await dataService.updateOne(this.collection, id, data)
         return result

@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
-export const shortdescriptionValidationMiddleware = body('shortDescription')
+export const shortdescriptionBodyValidationMiddleware = body('shortDescription')
     .exists()
     .notEmpty({ ignore_whitespace: true })
     .isString()

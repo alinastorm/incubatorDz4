@@ -1,4 +1,4 @@
-import { AdapterType, IObject } from "../types/types.js"
+import { AdapterType, IObject, searchNameTerm, SortDirectionType } from "../types/types.js"
 
 
 class DataService implements AdapterType {
@@ -6,7 +6,7 @@ class DataService implements AdapterType {
     async connect() { return await this.dbAdapter.connect() }
     async readCount(collectionName: string) { return await this.dbAdapter.readCount(collectionName) }
     async readAll(collectionName: string) { return await this.dbAdapter.readAll(collectionName) }
-    async readAllOrByNamePagination(collectionName: string, pageNumber: number, pageSize: number, searchNameTerm?: string, searchIdTerm?: string) { return await this.dbAdapter.readAllOrByNamePagination(collectionName, pageNumber, pageSize, searchNameTerm, searchIdTerm) }
+    async readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number,sortBy:string, sortDirection: 1|-1, searchNameTerm?: searchNameTerm) { return await this.dbAdapter.readAllOrByPropPaginationSort(collectionName, pageNumber, pageSize,sortBy, sortDirection, searchNameTerm) }
     async readOne(collectionName: string, id: string) { return await this.dbAdapter.readOne(collectionName, id) }
     async createOne(collectionName: string, element: IObject) { return await this.dbAdapter.createOne(collectionName, element) }
     async updateOne(collectionName: string, id: string, data: IObject) { return await this.dbAdapter.updateOne(collectionName, id, data) }

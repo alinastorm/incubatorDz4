@@ -1,6 +1,6 @@
 import { param } from 'express-validator';
 
-export const bloggerIdValidationMiddleware = param('bloggerId')
+export const bloggeridParamValidationMiddleware = param('bloggerId')
     .exists()
     .isLength({ max: "1664548877572".length })
 

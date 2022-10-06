@@ -2,7 +2,7 @@ import { body } from 'express-validator';
 import blogsReadService from '../repository/blogs-read-repository.js';
 
 
-export const blogIdValidationMiddleware = body('blogId')
+export const blogidParamValidationMiddleware = body('blogId')
     .custom(async (val, { req }) => {
         const blog = await blogsReadService.readOne(val)
         if (!blog) throw Error('bloger not finded')

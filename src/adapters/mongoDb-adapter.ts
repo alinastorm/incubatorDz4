@@ -1,5 +1,5 @@
-import { Collection, MongoClient, Document, ObjectId } from 'mongodb'
-import { IObject } from '../types/types';
+import { Collection, MongoClient, Document, ObjectId, Filter } from 'mongodb'
+import { AdapterType, IObject, searchNameTerm, SortDirectionType } from '../types/types';
 
 
 // Connection URL
@@ -11,7 +11,7 @@ const database = clientMongo.db(dbName);
 //Connect to Database
 // const connect = await new Promise<any>
 
-class DbMongo {
+class DbMongo implements AdapterType {
 
     async connect() {
         try {
@@ -44,20 +44,39 @@ class DbMongo {
         const collection: Collection<Document> = database.collection(collectionName)
         return await collection.countDocuments()
     }
-    async readAllOrByNamePagination(collectionName: string, pageNumber: number, pageSize: number, searchName?: string) {
+    async readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number, sortBy: string, sortDirection: 1 | -1, searchNameTerm?: searchNameTerm) {
         const collection: Collection<Document> = database.collection(collectionName)
-        if (searchName) {
-            return (await collection.find({ name: { $regex: searchName, $options: 'i' } }).skip((pageNumber - 1) * pageSize).limit(pageSize).toArray()).map((elem) => {
+        if (searchNameTerm) {
+            let find: Filter<any> = {}
+            for (const key in searchNameTerm.search) {
+                if (Object.prototype.hasOwnProperty.call(searchNameTerm, key)) {
+                    const element = searchNameTerm.search[key];
+                    searchNameTerm.strict ?
+                        find[key] = element :
+                        find[key] = { $regex: element, $options: 'i' }
+                }
+            }
+            return (await collection
+                .find(find)
+                .skip((pageNumber - 1) * pageSize)
+                .limit(pageSize)
+                .sort({ [sortBy]: sortDirection })
+                .toArray())
+                .map((elem) => {
+                    const { _id, ...other } = elem
+                    return { id: _id, ...other }
+                })
+        }
+        return (await collection
+            .find()
+            .skip((pageNumber - 1) * pageSize)
+            .limit(pageSize)
+            .sort({ [sortBy]: sortDirection })
+            .toArray())
+            .map((elem) => {
                 const { _id, ...other } = elem
                 return { id: _id, ...other }
             })
-        }
-        return (await collection.find().skip((pageNumber - 1) * pageSize).limit(pageSize).toArray()).map((elem) => {
-            console.log('elem:', elem);
-
-            const { _id, ...other } = elem
-            return { id: _id, ...other }
-        })
     }
     async readOne(collectionName: string, id: string) {
         const collection: Collection<Document> = database.collection(collectionName)

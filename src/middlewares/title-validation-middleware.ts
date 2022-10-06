@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
-export const titleValidationMiddleware = body('title')
+export const titleBodyValidationMiddleware = body('title')
     .exists()
     .notEmpty({ ignore_whitespace: true })
     .isString()

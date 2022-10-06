@@ -1,6 +1,6 @@
 import { body, query } from 'express-validator';
 
-export const nameValidationMiddleware = body('name')
+export const nameBodyValidationMiddleware = body('name')
     .exists()
     .notEmpty({ ignore_whitespace: true })
     .isString()
