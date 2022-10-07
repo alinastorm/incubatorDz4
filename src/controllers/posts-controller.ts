@@ -15,7 +15,7 @@ class Controller {
         req: RequestWithQuery<{ pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1 }>,
         res: Response<Paginator<PostViewModel>>
     ) {
-        const { pageNumber, pageSize, sortBy, sortDirection } = req.query
+        const { pageNumber, pageSize, sortBy, sortDirection } = req.query        
         const result = await postsReadRepository.readAllWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection)
         res.status(HTTP_STATUSES.OK_200).json(result)
     }

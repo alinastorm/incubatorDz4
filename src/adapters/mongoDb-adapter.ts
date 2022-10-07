@@ -28,6 +28,9 @@ class DbMongo implements AdapterType {
             await clientMongo.close()
         }
     }
+    async disconnect(){
+        await clientMongo.close();  
+    }
     async readAll(collectionName: string, searchNameTerm?: string) {
         const collection: Collection<Document> = database.collection(collectionName)
         return searchNameTerm ?
@@ -45,6 +48,7 @@ class DbMongo implements AdapterType {
         return await collection.countDocuments()
     }
     async readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number, sortBy: string, sortDirection: 1 | -1, searchNameTerm?: searchNameTerm) {
+       
         const collection: Collection<Document> = database.collection(collectionName)
         if (searchNameTerm) {
             let find: Filter<any> = {}

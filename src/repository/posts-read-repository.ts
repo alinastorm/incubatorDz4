@@ -16,17 +16,26 @@ class Service {
         return result
     }
     async readAllWithPaginationAndSort(pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1) {
-        const result: Paginator<PostViewModel> = await dataService.readAllOrByPropPaginationSort(
+        const posts:  PostViewModel[] = await dataService.readAllOrByPropPaginationSort(
             this.collection,
             pageNumber,
             pageSize,
             sortBy,
             sortDirection
         )
+        const count = await dataService.readCount(this.collection)
+
+        const result: Paginator<PostViewModel> = {
+            "pagesCount": Math.ceil(count / pageSize),
+            "page": pageNumber,
+            "pageSize": pageSize,
+            "totalCount": count,
+            "items": posts
+        }
         return result
     }
     async readAllPostsByBlogIdWithPaginationAndSort(pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1, blogId: string) {
-        const result: Paginator<PostViewModel> = await dataService.readAllOrByPropPaginationSort(
+        const posts: PostViewModel[] = await dataService.readAllOrByPropPaginationSort(
             this.collection,
             pageNumber,
             pageSize,
@@ -34,6 +43,15 @@ class Service {
             sortDirection,
             { search: { blogId }, strict: true }
         )
+        const count = await dataService.readCount(this.collection)
+
+        const result: Paginator<PostViewModel> = {
+            "pagesCount": Math.ceil(count / pageSize),
+            "page": pageNumber,
+            "pageSize": pageSize,
+            "totalCount": count,
+            "items": posts
+        }
         return result
     }
     async readOne(id: string) {

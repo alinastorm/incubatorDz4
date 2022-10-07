@@ -3,18 +3,25 @@ import bodyParser from 'body-parser';
 import blogsRouting from '../routes/blogs-router';
 import postsRouting from '../routes/posts-router';
 import testingRouting from '../routes/testing-router';
+import * as core from 'express-serve-static-core';
+import * as http from 'http';
+
+
 
 class HttpService {
-    httpServer = express()
-    
+    app: core.Express = express()
+    server!: http.Server
     port: number | string = process.env.PORT || 9000
     run() {
-        this.httpServer.use(bodyParser.json())
-        testingRouting(this.httpServer)
-        blogsRouting(this.httpServer)
-        postsRouting(this.httpServer)
+        this.app.use(bodyParser.json())
+        testingRouting(this.app)
+        blogsRouting(this.app)
+        postsRouting(this.app)
         //starting server
-        this.httpServer.listen(this.port, () => console.log(`http://localhost:${this.port}`))
+        this.server = this.app.listen(this.port, () => console.log(`http://localhost:${this.port}`))
+    }
+    stop() {
+        this.server.close()
     }
 }
 

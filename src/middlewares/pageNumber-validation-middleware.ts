@@ -1,11 +1,11 @@
 import { param, query } from 'express-validator';
 
 export const pageNumberQueryValidationMiddleware = query('pageNumber')
+    .default(1)
     .custom((value: string) => {
         return +value;
     })
     .isNumeric()
-    .default(1)
     .exists()
 
 

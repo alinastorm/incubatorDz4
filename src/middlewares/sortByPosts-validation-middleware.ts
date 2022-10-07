@@ -1,6 +1,7 @@
 import { param, query } from 'express-validator';
 
 export const sortByPostsQueryValidationMiddleware = query('sortBy')
+    .default("createdAt")
     .notEmpty({ ignore_whitespace: true })
     .isString()
     .isLength({ max: 16 })
@@ -13,7 +14,6 @@ export const sortByPostsQueryValidationMiddleware = query('sortBy')
         'blogName',
         'createdAt'
     ])
-    .default("createdAt")
     .exists()
 
 // .withMessage({ message: 'wrong id', field: "id", code: 400 })
