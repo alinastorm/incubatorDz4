@@ -43,7 +43,7 @@ export default function setRoutes(app: Express) {
         sortDirectionQueryValidationMiddleware,
         checkValidationMiddleware,
         blogsController.readAllPostsByBlogIdWithPaginationAndSort)
-    app.post(`/blogs/:id/posts`,
+    app.post(`/blogs/:blogId/posts`,
         authorizationBasicMiddleware,
         blogIdParamUriValidationMiddleware,
         titleBodyValidationMiddleware,

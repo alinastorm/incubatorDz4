@@ -13,11 +13,13 @@ class Service {
     constructor(private collection: string) { }
 
 
-    async createOne(data: PostInputModel) {
-        const { name } = await blogsReadRepository.readOne(data.blogId)
+    async createOne(data: PostInputModel & { blogName: string }) {
+        console.log("data.blogId:", data.blogId);
+        console.log("await blogsReadRepository.readOne(data.blogId):", await blogsReadRepository.readOne(data.blogId));
+
+        // const { name } = await blogsReadRepository.readOne(data.blogId)
         const element: PostViewModel = {
             ...data,
-            blogName: name,
             createdAt: new Date().toISOString()
         }
         const id: string = await dataService.createOne(this.collection, element)

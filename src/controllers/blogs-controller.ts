@@ -59,19 +59,20 @@ class Controller {
         res.status(HTTP_STATUSES.OK_200).send(result)
     }
     async createPostsByBlogId(
-        req: RequestWithParamsBody<{ blogId: string }, BlogPostInputModel>,
+        req: RequestWithParamsBody<{ blogId: string }, BlogPostInputModel & { blogName: string }>,
         res: Response<PostViewModel>
     ) {
         const blogId = req.params.blogId
-        const { content, shortDescription, title } = req.body
-        const element: PostInputModel = {
+        const { content, shortDescription, title, blogName } = req.body
+        const element: PostInputModel & { blogName: string } = {
             title,
             shortDescription,
             content,
             blogId,
+            blogName
         }
         const result = await postsWriteRepository.createOne(element)
-        res.status(HTTP_STATUSES.OK_200).send(result)
+        res.status(HTTP_STATUSES.CREATED_201).send(result)
     }
     async updateOne(
         req: RequestWithParams<{ id: string }>,
@@ -102,7 +103,7 @@ class Controller {
     async deleteOne(
         req: RequestWithParams<{ id: string }>,
         res: Response
-    ) {        
+    ) {
         const id = req.params.id
         const result = await blogsReadRepository.readOne(id)
         if (!result) {

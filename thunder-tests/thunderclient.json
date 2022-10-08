@@ -17,7 +17,7 @@
     "_id": "8a5eab03-16d7-4ab9-98e2-effafc8a8514",
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
-    "name": "POST BLOGS",
+    "name": "POST BLOG",
     "url": "http://127.0.0.1:9001/blogs",
     "method": "POST",
     "sortNum": 937.5,
@@ -48,7 +48,7 @@
     "method": "GET",
     "sortNum": 625,
     "created": "2022-09-15T13:04:24.807Z",
-    "modified": "2022-10-02T18:44:31.319Z",
+    "modified": "2022-10-08T12:03:43.458Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -72,11 +72,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET BLOGS BY ID",
-    "url": "http://127.0.0.1:9001/blogs/6339eaca155a9b825fd9eeac",
+    "url": "http://127.0.0.1:9001/blogs/634166ac437c75cd7d9f7d68",
     "method": "GET",
     "sortNum": 1093.8,
     "created": "2022-09-15T13:04:24.808Z",
-    "modified": "2022-10-02T19:47:29.043Z",
+    "modified": "2022-10-08T12:03:12.954Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -165,12 +165,12 @@
     "method": "POST",
     "sortNum": 1015.6,
     "created": "2022-10-02T18:49:43.509Z",
-    "modified": "2022-10-02T19:47:03.102Z",
+    "modified": "2022-10-08T12:04:19.668Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "  {\n    \"content\": \"new post content\",\n    \"shortDescription\": \"description\",\n    \"title\": \"post title\",\n    \"blogId\": \"6339ea323c36ccbfa13f566b\"\n  }",
+      "raw": "  {\n        \"title\": \"string\",\n        \"shortDescription\": \"string\",\n        \"content\": \"string\",\n        \"blogId\": \"6341673bc1fd27a2b352c346\"\n    }\n",
       "form": []
     },
     "auth": {
@@ -187,11 +187,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET POSTS BY ID",
-    "url": "http://127.0.0.1:9001/posts/6339eab7155a9b825fd9eeab",
+    "url": "http://127.0.0.1:9001/posts/63416743c1fd27a2b352c347",
     "method": "GET",
     "sortNum": 1132.8,
     "created": "2022-10-02T18:49:47.673Z",
-    "modified": "2022-10-02T19:49:29.773Z",
+    "modified": "2022-10-08T12:04:45.536Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -258,6 +258,32 @@
     "body": {
       "type": "json",
       "raw": "{ \"content\": \"new post content\",\r\n\"shortDescription\": \"description\",\r\n\"title\": \"post title\",\r\n\"blogId\": \"6339f6e9ab07e34752713b5e\"\r\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "qwerty"
+      }
+    },
+    "tests": []
+  },
+  {
+    "_id": "15d1ccab-97bc-4469-a4b6-f4d406398107",
+    "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
+    "containerId": "",
+    "name": "POST BLOG POST",
+    "url": "http://127.0.0.1:9001/blogs/63416a9e0cf268837a4513d8/posts",
+    "method": "POST",
+    "sortNum": 976.5,
+    "created": "2022-10-08T10:52:24.258Z",
+    "modified": "2022-10-08T12:28:29.736Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\": \"string\",\n  \"shortDescription\": \"string\",\n  \"content\": \"string\"\n}",
       "form": []
     },
     "auth": {

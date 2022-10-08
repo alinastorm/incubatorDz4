@@ -3,7 +3,7 @@ import request from "supertest"
 import httpServerService from "../services/httpServer-service"
 import DbMongo from "../adapters/mongoDb-adapter"
 import Ajv from "ajv"
-import { HTTP_STATUSES } from "../types/types"
+import { BlogViewModel, HTTP_STATUSES, PostViewModel } from "../types/types"
 
 const ajv = new Ajv({ strict: false })
 function check(schema: any, body: any) {
@@ -20,16 +20,15 @@ describe("/blogs", () => {
         await DbMongo.disconnect()
         httpServerService.stop()
     })
-    it('All delete', async () => {
+    test('All delete', async () => {
         const { status } = await request(httpServerService.server).delete("/testing/all-data")
         expect(status).toBe(204)
     })
-    it('GET Blogs []', async () => {
+    test('GET Blogs []', async () => {
 
         const { status, body } = await request(httpServerService.server).get("/blogs")
 
         expect(status).toBe(200)
-        console.log('body:', body);
 
         expect(body).toStrictEqual({
             "pagesCount": 0,
@@ -40,21 +39,7 @@ describe("/blogs", () => {
         })
 
     })
-    it('GET Posts []', async () => {
-
-        const { status, body } = await request(httpServerService.server).get("/posts")
-
-        expect(status).toBe(200)
-        expect(body).toStrictEqual({
-            "pagesCount": 0,
-            "page": 1,
-            "pageSize": 10,
-            "totalCount": 0,
-            "items": []
-        })
-
-    })
-    it('POST Blogs unauthorized', async () => {
+    test('POST Blogs unauthorized', async () => {
         const { status, body } = await request(httpServerService.server)
             .post("/blogs")
             .send({
@@ -64,8 +49,8 @@ describe("/blogs", () => {
 
         expect(status).toBe(401)
     })
-    let post: any = null
-    it('POST Blogs ', async () => {
+    let blog: BlogViewModel | null = null
+    test('POST Blogs ', async () => {
         const { status, body } = await request(httpServerService.server)
             .post("/blogs")
             .set('Authorization', 'Basic YWRtaW46cXdlcnR5')
@@ -99,9 +84,87 @@ describe("/blogs", () => {
 
         expect(status).toBe(201)
         expect(check(schema, body)).toBe(true)
-        post = body
+        blog = body
     })
-    it('GET Blogs', async () => {
+    test('GET Blogs ID', async () => {
+        const schema = {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "youtubeUrl": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "youtubeUrl",
+                "createdAt"
+            ]
+        }
+
+        const { status, body } = await request(httpServerService.server).get(`/blogs/${blog?.id}`)
+
+        expect(status).toBe(200)
+        expect(check(schema, body)).toBe(true)
+        expect(body).toStrictEqual(blog)
+    })
+    const newElem = {
+        "name": "string2",
+        "youtubeUrl": "https://someurl2.com"
+    }
+    test('PUT Blogs ', async () => {
+
+
+        const { status } = await request(httpServerService.server)
+            .put(`/blogs/${blog?.id}`)
+            .set('Authorization', 'Basic YWRtaW46cXdlcnR5')
+            .send(newElem)
+
+        expect(status).toBe(204)
+
+    })
+    test('GET Blog after update ', async () => {
+
+        const schema = {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "youtubeUrl": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "youtubeUrl",
+                "createdAt"
+            ]
+        }
+        const { status, body } = await request(httpServerService.server).get(`/blogs/${blog?.id}`)
+
+        expect(status).toBe(200)
+        expect(check(schema, body)).toBe(true)
+        expect(body).toStrictEqual({ ...blog, ...newElem })
+
+    })
+    test('GET Blogs after update', async () => {
         const schema = {
             "type": "object",
             "properties": {
@@ -160,80 +223,71 @@ describe("/blogs", () => {
         expect(status).toBe(200)
         expect(check(schema, body)).toBe(true)
         expect(body.items.length).toBe(1)
-        expect(body.items[0]).toStrictEqual(post)
+        expect(body.items[0]).toStrictEqual({ ...blog, ...newElem })
     })
-    it('GET Posts', async () => {
-
-        const { status, body } = await request(httpServerService.server).get("/posts").send({})
+    let newPost: any = {
+        "title": "string",
+        "shortDescription": "string",
+        "content": "string"
+    }
+    test('POST Post by Blog ID', async () => {
+        const { status, body } = await request(httpServerService.server)
+            .post(`/blogs/${blog?.id}/posts`)
+            .set('Authorization', 'Basic YWRtaW46cXdlcnR5')
+            .send(newPost)
         const schema = {
             "type": "object",
             "properties": {
-                "pagesCount": {
-                    "type": "integer"
+                "id": {
+                    "type": "string"
                 },
-                "page": {
-                    "type": "integer"
+                "title": {
+                    "type": "string"
                 },
-                "pageSize": {
-                    "type": "integer"
+                "shortDescription": {
+                    "type": "string"
                 },
-                "totalCount": {
-                    "type": "integer"
+                "content": {
+                    "type": "string"
                 },
-                "items": {
-                    "type": "array",
-                    "items": [
-                        {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "title": {
-                                    "type": "string"
-                                },
-                                "shortDescription": {
-                                    "type": "string"
-                                },
-                                "content": {
-                                    "type": "string"
-                                },
-                                "blogId": {
-                                    "type": "string"
-                                },
-                                "blogName": {
-                                    "type": "string"
-                                },
-                                "createdAt": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "title",
-                                "shortDescription",
-                                "content",
-                                "blogId",
-                                "blogName",
-                                "createdAt"
-                            ]
-                        }
-                    ]
+                "blogId": {
+                    "type": "string"
+                },
+                "blogName": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
                 }
             },
             "required": [
-                "pagesCount",
-                "page",
-                "pageSize",
-                "totalCount",
-                "items"
+                "id",
+                "title",
+                "shortDescription",
+                "content",
+                "blogId",
+                "blogName",
+                "createdAt"
             ]
         }
-        expect(status).toBe(200)
+        console.log("body:", body);
+
+        expect(status).toBe(201)
         expect(check(schema, body)).toBe(true)
+        // post = body
     })
-    it('Wrong route', async () => {
-        const { status } = await request(httpServerService.server).get("/wrong")
-        expect(status).toBe(HTTP_STATUSES.NOT_FOUND_404)
+    test('Delete Blog by ID', async () => {
+
+        const { status } = await request(httpServerService.server)
+            .delete(`/blogs/${blog?.id}`)
+            .set('Authorization', 'Basic YWRtaW46cXdlcnR5')
+
+        expect(status).toBe(204)
+    })
+    test('GET Blog after delete ', async () => {
+        const { status } = await request(httpServerService.server).get(`/blogs/${blog?.id}`)
+
+        expect(status).toBe(404)
+
     })
 })

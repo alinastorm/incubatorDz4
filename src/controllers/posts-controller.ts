@@ -15,13 +15,13 @@ class Controller {
         req: RequestWithQuery<{ pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1 }>,
         res: Response<Paginator<PostViewModel>>
     ) {
-        const { pageNumber, pageSize, sortBy, sortDirection } = req.query        
+        const { pageNumber, pageSize, sortBy, sortDirection } = req.query
         const result = await postsReadRepository.readAllWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection)
         res.status(HTTP_STATUSES.OK_200).json(result)
     }
 
 
-    async createOne(req: RequestWithBody<PostInputModel>, res: Response<PostViewModel>) {
+    async createOne(req: RequestWithBody<PostInputModel & { blogName: string }>, res: Response<PostViewModel>) {
         const body = req.body
         const result = await postsWriteRepository.createOne(body)
         res.status(HTTP_STATUSES.CREATED_201).send(result)
@@ -54,7 +54,7 @@ class Controller {
         await postsWriteRepository.replaceOne(id, body)
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
-    async deleteOne(req: RequestWithParams<{ id: string }>, res: Response) {       
+    async deleteOne(req: RequestWithParams<{ id: string }>, res: Response) {
         const id = req.params.id
         const result = await postsReadRepository.readOne(id)
         if (!result) {
