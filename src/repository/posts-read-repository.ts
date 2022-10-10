@@ -43,7 +43,7 @@ class Service {
             sortDirection,
             { search: { blogId }, strict: true }
         )
-        const count = await dataService.readCount(this.collection)
+        const count = await dataService.readCount(this.collection, { search: { blogId }, strict: true })
 
         const result: Paginator<PostViewModel> = {
             "pagesCount": Math.ceil(count / pageSize),

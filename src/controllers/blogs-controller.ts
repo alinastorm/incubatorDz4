@@ -22,9 +22,7 @@ class Controller {
         req: RequestWithQuery<{ searchNameTerm: string, pageNumber: number, pageSize: number, sortBy: keyof BlogViewModel, sortDirection: 1 | -1 }>,
         res: Response<Paginator<BlogViewModel>>
     ) {
-        const { searchNameTerm, pageNumber, pageSize, sortBy, sortDirection } = req.query
-        console.log('searchNameTerm:',searchNameTerm);
-        
+        const { searchNameTerm, pageNumber, pageSize, sortBy, sortDirection } = req.query        
         const result = await blogsReadRepository.readAllByNameWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection, searchNameTerm)
         res.status(HTTP_STATUSES.OK_200).json(result)
     }
@@ -51,10 +49,10 @@ class Controller {
         req: RequestWithParamsQuery<{ blogId: string }, { pageNumber: number, pageSize: number, sortBy: keyof PostViewModel, sortDirection: 1 | -1 }>,
         res: Response<Paginator<PostViewModel>>
     ) {
-        const id = req.params.blogId
+        const blogId = req.params.blogId
         const { pageNumber, pageSize, sortBy, sortDirection } = req.query
 
-        const result: Paginator<PostViewModel> = await postsReadRepository.readAllPostsByBlogIdWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection, id)
+        const result: Paginator<PostViewModel> = await postsReadRepository.readAllPostsByBlogIdWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection, blogId)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         }

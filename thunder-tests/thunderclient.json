@@ -391,11 +391,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET POSTS Pagination By BLOG ID",
-    "url": "http://127.0.0.1:9001/blogs/63189b06003380064c4193be/posts",
+    "url": "http://127.0.0.1:9001/blogs/63445a9599eb74c5dcc3c90e/posts",
     "method": "GET",
     "sortNum": 712.9,
     "created": "2022-10-10T13:22:46.158Z",
-    "modified": "2022-10-10T15:19:06.473Z",
+    "modified": "2022-10-10T17:50:49.016Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -419,16 +419,16 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET BLOGS Pagination and Sort",
-    "url": "http://127.0.0.1:9001/blogs?pageSize=5&pageNumber=1&searchNameTerm=10&sortDirection=asc&sortBy=name",
+    "url": "http://127.0.0.1:9001/blogs?pageSize=50&pageNumber=1&searchNameTerm=blog&sortDirection=asc&sortBy=name",
     "method": "GET",
     "sortNum": 722.7,
     "created": "2022-10-10T15:19:03.246Z",
-    "modified": "2022-10-10T16:11:29.346Z",
+    "modified": "2022-10-10T17:12:31.814Z",
     "headers": [],
     "params": [
       {
         "name": "pageSize",
-        "value": "5",
+        "value": "50",
         "isPath": false
       },
       {
@@ -438,7 +438,7 @@
       },
       {
         "name": "searchNameTerm",
-        "value": "10",
+        "value": "blog",
         "isPath": false
       },
       {

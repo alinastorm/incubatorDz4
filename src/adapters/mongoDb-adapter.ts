@@ -45,18 +45,25 @@ class DbMongo implements AdapterType {
     }
     async readCount(collectionName: string, searchNameTerm?: searchNameTerm) {
         const collection: Collection<Document> = database.collection(collectionName)
-        let find: Filter<any> = {}
-
+        let filter: Filter<any> = {}
+        // const filter = searchNameTerm ? searchNameTerm : ""
         if (searchNameTerm) {
             for (const key in searchNameTerm.search) {
 
                 const element = searchNameTerm.search[key];
                 searchNameTerm.strict ?
-                    find[key] = element :
-                    find[key] = { $regex: element, $options: 'i' }
+                filter[key] = element :
+                filter[key] = { $regex: element, $options: 'i' }
             }
         }
-        return await collection.countDocuments(find)
+
+        if(await (await collection.find(filter).toArray()).length===13){
+
+            console.log("collection.find(filter).toArray():",await collection.find(filter).toArray());
+            console.log("collection.find(filter).length():",await (await collection.find(filter).toArray()).length);
+        }
+        
+        return await collection.countDocuments(filter)
     }
     async readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number, sortBy: string, sortDirection: 1 | -1, searchNameTerm?: searchNameTerm) {
 
