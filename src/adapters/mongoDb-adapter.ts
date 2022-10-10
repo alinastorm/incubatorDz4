@@ -28,8 +28,8 @@ class DbMongo implements AdapterType {
             await clientMongo.close()
         }
     }
-    async disconnect(){
-        await clientMongo.close();  
+    async disconnect() {
+        await clientMongo.close();
     }
     async readAll(collectionName: string, searchNameTerm?: string) {
         const collection: Collection<Document> = database.collection(collectionName)
@@ -43,22 +43,32 @@ class DbMongo implements AdapterType {
                 return { id: _id, ...other }
             })
     }
-    async readCount(collectionName: string) {
+    async readCount(collectionName: string, searchNameTerm?: searchNameTerm) {
         const collection: Collection<Document> = database.collection(collectionName)
-        return await collection.countDocuments()
+        let find: Filter<any> = {}
+
+        if (searchNameTerm) {
+            for (const key in searchNameTerm.search) {
+
+                const element = searchNameTerm.search[key];
+                searchNameTerm.strict ?
+                    find[key] = element :
+                    find[key] = { $regex: element, $options: 'i' }
+            }
+        }
+        return await collection.countDocuments(find)
     }
     async readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number, sortBy: string, sortDirection: 1 | -1, searchNameTerm?: searchNameTerm) {
-       
+
         const collection: Collection<Document> = database.collection(collectionName)
         if (searchNameTerm) {
             let find: Filter<any> = {}
             for (const key in searchNameTerm.search) {
-                if (Object.prototype.hasOwnProperty.call(searchNameTerm, key)) {
-                    const element = searchNameTerm.search[key];
-                    searchNameTerm.strict ?
-                        find[key] = element :
-                        find[key] = { $regex: element, $options: 'i' }
-                }
+
+                const element = searchNameTerm.search[key];
+                searchNameTerm.strict ?
+                    find[key] = element :
+                    find[key] = { $regex: element, $options: 'i' }
             }
             return (await collection
                 .find(find)

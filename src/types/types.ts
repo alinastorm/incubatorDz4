@@ -69,7 +69,7 @@ export interface AdapterType {
     connect(): any
     readAll(collectionName: string): any
     readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number, sortBy: string, sortDirection: 1 | -1, searchNameTerm?: IObject): any
-    readCount(collectionName: string): any
+    readCount(collectionName: string,searchNameTerm?: searchNameTerm): any
     readOne(collectionName: string, id: string): any
     createOne(collectionName: string, element: IObject): any
     updateOne(collectionName: string, id: string, data: IObject): any

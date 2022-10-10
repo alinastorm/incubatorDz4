@@ -6,6 +6,7 @@
 1.0.5 fix: bloggerId midleware
 1.0.6 fix: pagination midleware
 1.0.7 fix: midleware
+1.0.8 fix: pagination,count
 
 
 

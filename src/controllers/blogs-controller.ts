@@ -23,6 +23,8 @@ class Controller {
         res: Response<Paginator<BlogViewModel>>
     ) {
         const { searchNameTerm, pageNumber, pageSize, sortBy, sortDirection } = req.query
+        console.log('searchNameTerm:',searchNameTerm);
+        
         const result = await blogsReadRepository.readAllByNameWithPaginationAndSort(pageNumber, pageSize, sortBy, sortDirection, searchNameTerm)
         res.status(HTTP_STATUSES.OK_200).json(result)
     }

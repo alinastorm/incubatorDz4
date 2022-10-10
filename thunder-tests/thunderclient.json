@@ -393,11 +393,65 @@
     "name": "GET POSTS Pagination By BLOG ID",
     "url": "http://127.0.0.1:9001/blogs/63189b06003380064c4193be/posts",
     "method": "GET",
-    "sortNum": 742.2,
+    "sortNum": 712.9,
     "created": "2022-10-10T13:22:46.158Z",
-    "modified": "2022-10-10T13:23:57.167Z",
+    "modified": "2022-10-10T15:19:06.473Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "qwerty"
+      }
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "schema",
+        "value": "{ \"type\": \"array\", \"items\": [ { \"type\": \"object\", \"properties\": { \"id\": { \"type\": \"integer\" }, \"canBeDownloaded\": { \"type\": \"boolean\" }, \"minAgeRestriction\": { \"type\": \"null\" }, \"createdAt\": { \"type\": \"string\" }, \"publicationDate\": { \"type\": \"string\" }, \"title\": { \"type\": \"string\" }, \"author\": { \"type\": \"string\" }, \"availableResolutions\": { \"type\": \"array\", \"items\": [ { \"type\": \"string\" } ] } }, \"required\": [ \"id\", \"canBeDownloaded\", \"minAgeRestriction\", \"createdAt\", \"publicationDate\", \"title\", \"author\", \"availableResolutions\" ] } ] }"
+      }
+    ]
+  },
+  {
+    "_id": "d80e5fca-17f3-46d4-b5be-4cfabf28f9d1",
+    "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
+    "containerId": "",
+    "name": "GET BLOGS Pagination and Sort",
+    "url": "http://127.0.0.1:9001/blogs?pageSize=5&pageNumber=1&searchNameTerm=10&sortDirection=asc&sortBy=name",
+    "method": "GET",
+    "sortNum": 722.7,
+    "created": "2022-10-10T15:19:03.246Z",
+    "modified": "2022-10-10T16:11:29.346Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "pageSize",
+        "value": "5",
+        "isPath": false
+      },
+      {
+        "name": "pageNumber",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "searchNameTerm",
+        "value": "10",
+        "isPath": false
+      },
+      {
+        "name": "sortDirection",
+        "value": "asc",
+        "isPath": false
+      },
+      {
+        "name": "sortBy",
+        "value": "name",
+        "isPath": false
+      }
+    ],
     "auth": {
       "type": "basic",
       "basic": {

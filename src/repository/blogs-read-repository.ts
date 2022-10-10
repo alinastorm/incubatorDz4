@@ -14,13 +14,23 @@ class Service {
         return result
     }
     async readAllByNameWithPaginationAndSort(pageNumber: number, pageSize: number, sortBy: keyof BlogViewModel, sortDirection: 1 | -1, searchNameTerm: string) {
-        let blogs: BlogViewModel[] =
-            searchNameTerm ?
-                await dataService.readAllOrByPropPaginationSort(this.collection, pageNumber, pageSize, sortBy, sortDirection, { search: { name: searchNameTerm }, strict: false }) :
-                await dataService.readAllOrByPropPaginationSort(this.collection, pageNumber, pageSize, sortBy, sortDirection)
 
-        const count = await dataService.readCount(this.collection)
-
+        let blogs: BlogViewModel[]
+        let count: number
+        if (searchNameTerm) {
+            blogs = await dataService.readAllOrByPropPaginationSort(this.collection, pageNumber, pageSize, sortBy, sortDirection, { search: { name: searchNameTerm }, strict: false })
+            count = await dataService.readCount(this.collection, { search: { name: searchNameTerm }, strict: false })
+            const result: Paginator<BlogViewModel> = {
+                "pagesCount": Math.ceil(count / pageSize),
+                "page": pageNumber,
+                "pageSize": pageSize,
+                "totalCount": count,
+                "items": blogs
+            }
+            return result
+        }
+        blogs = await dataService.readAllOrByPropPaginationSort(this.collection, pageNumber, pageSize, sortBy, sortDirection)
+        count = await dataService.readCount(this.collection)
         const result: Paginator<BlogViewModel> = {
             "pagesCount": Math.ceil(count / pageSize),
             "page": pageNumber,

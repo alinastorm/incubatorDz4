@@ -4,7 +4,7 @@ import { AdapterType, IObject, searchNameTerm, SortDirectionType } from "../type
 class DataService implements AdapterType {
     constructor(private dbAdapter: AdapterType) { }
     async connect() { return await this.dbAdapter.connect() }
-    async readCount(collectionName: string) { return await this.dbAdapter.readCount(collectionName) }
+    async readCount(collectionName: string, searchNameTerm?: searchNameTerm) { return await this.dbAdapter.readCount(collectionName,searchNameTerm) }
     async readAll(collectionName: string) { return await this.dbAdapter.readAll(collectionName) }
     async readAllOrByPropPaginationSort(collectionName: string, pageNumber: number, pageSize: number,sortBy:string, sortDirection: 1|-1, searchNameTerm?: searchNameTerm) { return await this.dbAdapter.readAllOrByPropPaginationSort(collectionName, pageNumber, pageSize,sortBy, sortDirection, searchNameTerm) }
     async readOne(collectionName: string, id: string) { return await this.dbAdapter.readOne(collectionName, id) }
