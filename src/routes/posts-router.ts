@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import postsController from "../controllers/posts-controller"
 import { titleBodyValidationMiddleware } from '../middlewares/title-validation-middleware';
-import { idParamValidationMiddleware } from '../middlewares/id-validation-middleware';
+import { postIdParamValidationMiddleware } from '../middlewares/postIdParam-validation-middleware';
 import { contentBodyValidationMiddleware } from '../middlewares/content-validation-middleware';
 import { shortdescriptionBodyValidationMiddleware } from '../middlewares/shortdescription-validation-middleware';
 import { schemaPostsValidationMiddleware } from '../middlewares/schemaPosts-validation-middleware';
@@ -15,6 +15,8 @@ import { sortByPostsQueryValidationMiddleware } from '../middlewares/sortByPosts
 import { sortDirectionQueryValidationMiddleware } from '../middlewares/sortDirection-validation-middleware';
 import { bloggerBodyIdInBDValidationMiddleware } from '../middlewares/bloggerIdInBDBody-validation-middleware';
 import { blogIdBodyValidationMiddleware } from '../middlewares/blogId-body-validation-middleware';
+import { postParamIdInBDValidationMiddleware } from '../middlewares/PostsIdInBDParam-validation-middleware copy';
+import { blogIdBodyWithCheckBDValidationMiddleware } from '../middlewares/blogId-bodyWithChekBD-validation-middleware';
 
 const mainRoute = 'posts'
 export default function setRoutes(app: Express) {
@@ -31,31 +33,34 @@ export default function setRoutes(app: Express) {
         titleBodyValidationMiddleware,
         shortdescriptionBodyValidationMiddleware,
         contentBodyValidationMiddleware,
-        blogIdBodyValidationMiddleware,
-        bloggerBodyIdInBDValidationMiddleware,
+        blogIdBodyWithCheckBDValidationMiddleware,
         checkValidationMiddleware,
+        // bloggerBodyIdInBDValidationMiddleware,
         postsController.createOne)
 
-    app.get(`/${mainRoute}/:id`,
-        idParamValidationMiddleware,
+    app.get(`/${mainRoute}/:postId`,
+        postIdParamValidationMiddleware,
         checkValidationMiddleware,
+        postParamIdInBDValidationMiddleware,
         postsController.readOne)
 
-    app.put(`/${mainRoute}/:id`,
+    app.put(`/${mainRoute}/:postId`,
         authorizationBasicMiddleware,
-        idParamValidationMiddleware,
+        postIdParamValidationMiddleware,
         titleBodyValidationMiddleware,
         shortdescriptionBodyValidationMiddleware,
         contentBodyValidationMiddleware,
-        blogIdBodyValidationMiddleware,
-        bloggerBodyIdInBDValidationMiddleware,
+        blogIdBodyWithCheckBDValidationMiddleware,
         checkValidationMiddleware,
+        postParamIdInBDValidationMiddleware,
+        // bloggerBodyIdInBDValidationMiddleware,
         postsController.updateOne)
 
-    app.delete(`/${mainRoute}/:id`,
+    app.delete(`/${mainRoute}/:postId`,
         authorizationBasicMiddleware,
-        idParamValidationMiddleware,
+        postIdParamValidationMiddleware,
         checkValidationMiddleware,
+        postParamIdInBDValidationMiddleware,
         postsController.deleteOne)
 }
 

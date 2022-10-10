@@ -1,6 +1,7 @@
 import { param, query } from 'express-validator';
 
 export const sortByBlogsQueryValidationMiddleware = query('sortBy')
+    .default("createdAt")
     .notEmpty({ ignore_whitespace: true })
     .isString()
     .isLength({ max: 16 })
@@ -10,7 +11,6 @@ export const sortByBlogsQueryValidationMiddleware = query('sortBy')
         'youtubeUrl',
         'createdAt'
     ])
-    .default("createdAt")
     .exists()
 
 // .withMessage({ message: 'wrong id', field: "id", code: 400 })

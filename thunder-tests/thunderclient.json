@@ -72,11 +72,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET BLOGS BY ID",
-    "url": "http://127.0.0.1:9001/blogs/63440e977ce9a11bbd32bf07",
+    "url": "http://127.0.0.1:9001/blogs/63189b06003380064c4193be",
     "method": "GET",
     "sortNum": 1093.8,
     "created": "2022-09-15T13:04:24.808Z",
-    "modified": "2022-10-10T12:23:09.163Z",
+    "modified": "2022-10-10T14:24:40.570Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -107,11 +107,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "PUT BLOGS BY ID",
-    "url": "http://127.0.0.1:9001/blogs/632f22a00641fe61dc5fac7d",
+    "url": "http://127.0.0.1:9001/blogs/634425bb18bbc02377f9e529",
     "method": "PUT",
     "sortNum": 1171.9,
     "created": "2022-09-15T13:04:24.810Z",
-    "modified": "2022-10-02T18:50:40.505Z",
+    "modified": "2022-10-10T14:03:53.104Z",
     "headers": [],
     "params": [],
     "body": {
@@ -205,12 +205,12 @@
     "method": "PUT",
     "sortNum": 1191.5,
     "created": "2022-10-02T18:49:51.451Z",
-    "modified": "2022-10-02T18:49:51.452Z",
+    "modified": "2022-10-10T14:04:27.325Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"title\": \"valid\",\n  \"content\": \"valid\",\n  \"blogId\": \"63189b06003380064c4193be\",\n  \"shortDescription\": \"length_101-DnZlTI1khUHpqOqCzftIYiSHCV8fKjYFQOoCIwmUczzW9V5K8cqY3aPKo3XKwbfrmeWOJyQgGnlX5sP3aW3RlaRSQx\"\n}",
+      "raw": "{\n  \"title\": \"valid\",\n  \"content\": \"valid\",\n  \"blogId\": \"63189b06003380064c4193be\",\n  \"shortDescription\": \"length_10-DnZlTI1khUHpqOqCzftIYiSHCV8fKjYFQOoCIwmUczzW9V5K8cqY3aPKo3XKwbfrmeWOJyQgGnlX5sP3aW3RlaRSQx\"\n}",
       "form": []
     },
     "auth": {
@@ -227,11 +227,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "DELETE POSTS BY ID",
-    "url": "http://127.0.0.1:9001/posts/632f0c7350ebde3574446c47",
+    "url": "http://127.0.0.1:9001/posts/634422feecc01a66070fbbbc",
     "method": "DELETE",
     "sortNum": 8730.5,
     "created": "2022-10-02T18:49:55.116Z",
-    "modified": "2022-10-02T18:51:12.176Z",
+    "modified": "2022-10-10T13:50:44.088Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -300,16 +300,16 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET BLOGS Pagination",
-    "url": "http://127.0.0.1:9001/blogs?pageSize=2&pageNumber=1",
+    "url": "http://127.0.0.1:9001/blogs?pageSize=100&pageNumber=1",
     "method": "GET",
     "sortNum": 703.1,
     "created": "2022-10-10T13:03:30.473Z",
-    "modified": "2022-10-10T13:04:07.537Z",
+    "modified": "2022-10-10T14:56:15.719Z",
     "headers": [],
     "params": [
       {
         "name": "pageSize",
-        "value": "2",
+        "value": "100",
         "isPath": false
       },
       {
@@ -318,6 +318,86 @@
         "isPath": false
       }
     ],
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "qwerty"
+      }
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "schema",
+        "value": "{ \"type\": \"array\", \"items\": [ { \"type\": \"object\", \"properties\": { \"id\": { \"type\": \"integer\" }, \"canBeDownloaded\": { \"type\": \"boolean\" }, \"minAgeRestriction\": { \"type\": \"null\" }, \"createdAt\": { \"type\": \"string\" }, \"publicationDate\": { \"type\": \"string\" }, \"title\": { \"type\": \"string\" }, \"author\": { \"type\": \"string\" }, \"availableResolutions\": { \"type\": \"array\", \"items\": [ { \"type\": \"string\" } ] } }, \"required\": [ \"id\", \"canBeDownloaded\", \"minAgeRestriction\", \"createdAt\", \"publicationDate\", \"title\", \"author\", \"availableResolutions\" ] } ] }"
+      }
+    ]
+  },
+  {
+    "_id": "e937628a-9fa8-4772-ba76-156f9eeab121",
+    "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
+    "containerId": "",
+    "name": "POST POST Error",
+    "url": "http://127.0.0.1:9001/posts",
+    "method": "POST",
+    "sortNum": 1035.2,
+    "created": "2022-10-10T13:08:34.537Z",
+    "modified": "2022-10-10T13:16:12.682Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\": \"valid\",\n  \"content\": \"valid\",\n  \"blogId\": \"63189b06003380064c4193be\",\n  \"shortDescription\": \"length_101-DnZlTI1khUHpqOqCzftIYiSHCV8fKjYFQOoCIwmUczzW9V5K8cqY3aPKo3XKwbfrmeWOJyQgGnlX5sP3aW3RlaRSQx\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "qwerty"
+      }
+    },
+    "tests": []
+  },
+  {
+    "_id": "ffc48a6b-4286-42e0-b7aa-db65088012d8",
+    "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
+    "containerId": "",
+    "name": "PUT POSTS BY ID Copy",
+    "url": "http://127.0.0.1:9001/posts/632f22a00641fe61dc5fac7d",
+    "method": "PUT",
+    "sortNum": 1201.3,
+    "created": "2022-10-10T13:19:10.811Z",
+    "modified": "2022-10-10T13:19:10.811Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\": \"valid\",\n  \"content\": \"valid\",\n  \"blogId\": \"63189b06003380064c4193be\",\n  \"shortDescription\": \"length_101-DnZlTI1khUHpqOqCzftIYiSHCV8fKjYFQOoCIwmUczzW9V5K8cqY3aPKo3XKwbfrmeWOJyQgGnlX5sP3aW3RlaRSQx\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "qwerty"
+      }
+    },
+    "tests": []
+  },
+  {
+    "_id": "7626a00e-e4d9-4ea9-867e-17d605723830",
+    "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
+    "containerId": "",
+    "name": "GET POSTS Pagination By BLOG ID",
+    "url": "http://127.0.0.1:9001/blogs/63189b06003380064c4193be/posts",
+    "method": "GET",
+    "sortNum": 742.2,
+    "created": "2022-10-10T13:22:46.158Z",
+    "modified": "2022-10-10T13:23:57.167Z",
+    "headers": [],
+    "params": [],
     "auth": {
       "type": "basic",
       "basic": {

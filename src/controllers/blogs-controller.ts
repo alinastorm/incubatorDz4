@@ -35,10 +35,10 @@ class Controller {
         res.status(HTTP_STATUSES.CREATED_201).send(result)
     }
     async readOne(
-        req: RequestWithParams<{ id: string }>,
+        req: RequestWithParams<{ blogId: string }>,
         res: Response<BlogViewModel>
     ) {
-        const id = req.params.id
+        const id = req.params.blogId
         const result = await blogsReadRepository.readOne(id)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
@@ -59,11 +59,13 @@ class Controller {
         res.status(HTTP_STATUSES.OK_200).send(result)
     }
     async createPostsByBlogId(
-        req: RequestWithParamsBody<{ blogId: string }, BlogPostInputModel & { blogName: string }>,
+        req: RequestWithParamsBody<{ blogId: string }, BlogPostInputModel >,
         res: Response<PostViewModel>
     ) {
         const blogId = req.params.blogId
-        const { content, shortDescription, title, blogName } = req.body
+        const { content, shortDescription, title } = req.body
+        const { name:blogName } = await blogsReadRepository.readOne(blogId)
+
         const element: PostInputModel & { blogName: string } = {
             title,
             shortDescription,
@@ -75,11 +77,11 @@ class Controller {
         res.status(HTTP_STATUSES.CREATED_201).send(result)
     }
     async updateOne(
-        req: RequestWithParams<{ id: string }>,
+        req: RequestWithParams<{ blogId: string }>,
         res: Response
     ) {
         const body = req.body
-        const id = req.params.id
+        const id = req.params.blogId
         const result = await blogsReadRepository.readOne(id)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
@@ -88,11 +90,11 @@ class Controller {
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
     async replaceOne(
-        req: Request,
+        req: RequestWithParams<{ blogId: string }>,
         res: Response
     ) {
         const body = req.body
-        const id = req.params.id
+        const id = req.params.blogId
         const result = await blogsReadRepository.readOne(id)
         if (!result) {
             return res.status(HTTP_STATUSES.NOT_FOUND_404).send('Not Found')
@@ -101,10 +103,10 @@ class Controller {
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
     async deleteOne(
-        req: RequestWithParams<{ id: string }>,
+        req: RequestWithParams<{ blogId: string }>,
         res: Response
     ) {
-        const id = req.params.id
+        const id = req.params.blogId
         const result = await blogsReadRepository.readOne(id)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)

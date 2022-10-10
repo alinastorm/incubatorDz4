@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import blogsReadRepository from '../repository/blogs-read-repository';
 import blogsService from '../repository/blogs-write-repository';
 import postsReadRepository from '../repository/posts-read-repository';
 import postsWriteRepository from '../repository/posts-write-repository';
@@ -21,22 +22,25 @@ class Controller {
     }
 
 
-    async createOne(req: RequestWithBody<PostInputModel & { blogName: string }>, res: Response<PostViewModel>) {
+    async createOne(req: RequestWithBody<PostInputModel>, res: Response<PostViewModel>) {
         const body = req.body
-        const result = await postsWriteRepository.createOne(body)
+        const { blogId } = req.body
+        const { name: blogName } = await blogsReadRepository.readOne(blogId)
+        const element = { ...body, blogName }
+        const result = await postsWriteRepository.createOne(element)
         res.status(HTTP_STATUSES.CREATED_201).send(result)
     }
-    async readOne(req: RequestWithParams<{ id: string }>, res: Response<PostViewModel>) {
-        const id = req.params.id
+    async readOne(req: RequestWithParams<{ postId: string }>, res: Response<PostViewModel>) {
+        const id = req.params.postId
         const result = await postsReadRepository.readOne(id)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         }
         res.status(HTTP_STATUSES.OK_200).send(result)
     }
-    async updateOne(req: RequestWithParamsBody<{ id: string }, PostInputModel>, res: Response) {
+    async updateOne(req: RequestWithParamsBody<{ postId: string }, PostInputModel>, res: Response) {
         const data = req.body
-        const id = req.params.id
+        const id = req.params.postId
         const result = await postsReadRepository.readOne(id)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
@@ -54,8 +58,8 @@ class Controller {
         await postsWriteRepository.replaceOne(id, body)
         return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
-    async deleteOne(req: RequestWithParams<{ id: string }>, res: Response) {
-        const id = req.params.id
+    async deleteOne(req: RequestWithParams<{ postId: string }>, res: Response) {
+        const id = req.params.postId
         const result = await postsReadRepository.readOne(id)
         if (!result) {
             return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
