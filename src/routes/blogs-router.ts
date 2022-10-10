@@ -15,6 +15,7 @@ import { titleBodyValidationMiddleware } from '../middlewares/title-validation-m
 import { shortdescriptionBodyValidationMiddleware } from '../middlewares/shortdescription-validation-middleware';
 import { contentBodyValidationMiddleware } from '../middlewares/content-validation-middleware';
 import { bloggerParamIdInBDValidationMiddleware } from '../middlewares/bloggerIdInBDParam-validation-middleware';
+import { sortByPostsQueryValidationMiddleware } from '../middlewares/sortByPosts-validation-middleware';
 
 
 export default function setRoutes(app: Express) {
@@ -38,7 +39,7 @@ export default function setRoutes(app: Express) {
         blogIdParamUriValidationMiddleware,
         pageNumberQueryValidationMiddleware,
         pageSizeQueryValidationMiddleware,
-        sortByBlogsQueryValidationMiddleware,
+        sortByPostsQueryValidationMiddleware,
         sortDirectionQueryValidationMiddleware,
         checkValidationMiddleware,
         bloggerParamIdInBDValidationMiddleware,

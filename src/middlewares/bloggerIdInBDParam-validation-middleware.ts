@@ -6,8 +6,8 @@ import { HTTP_STATUSES } from '../types/types';
 
 
 export const bloggerParamIdInBDValidationMiddleware = async (req: any, res: Response, next: NextFunction) => {
-    const val = req.params.blogId
-    const blog = await blogsReadRepository.readOne(val)
+    const blogId = req.params.blogId
+    const blog = await blogsReadRepository.readOne(blogId)
     if (!blog) {
         return res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
     }

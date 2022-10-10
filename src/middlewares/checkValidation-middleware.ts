@@ -13,6 +13,15 @@ export const checkValidationMiddleware = (req: any, res: Response, next: NextFun
             }
         })
         const result: APIErrorResult = { errorsMessages: error }
+        if(req.method==="GET"){
+            console.log('req.method:', req.method);
+            console.log('req.url:', req.url);
+            console.log('req.params:', req.params);
+            console.log('req.query:', req.query);
+            console.log('req.body:', req.body);
+            console.log('result:', result);
+        }
+
         return res.status(400).json(result);
     }
     next()

@@ -165,12 +165,12 @@
     "method": "POST",
     "sortNum": 1015.6,
     "created": "2022-10-02T18:49:43.509Z",
-    "modified": "2022-10-10T12:11:53.132Z",
+    "modified": "2022-10-10T18:25:45.443Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "  {\n        \"title\": \"string\",\n        \"shortDescription\": \"string\",\n        \"content\": \"string\",\n        \"blogId\": \"63440be6f45fa53532a18517\"\n    }\n",
+      "raw": "  {\n        \"title\": \"string\",\n        \"shortDescription\": \"string\",\n        \"content\": \"string\",\n        \"blogId\": \"6344637e5ccd3f3c6fb66741\"\n    }\n",
       "form": []
     },
     "auth": {
@@ -391,13 +391,34 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET POSTS Pagination By BLOG ID",
-    "url": "http://127.0.0.1:9001/blogs/63445a9599eb74c5dcc3c90e/posts",
+    "url": "http://127.0.0.1:9001/blogs/6344663c1ef4fa5bbe9f4941/posts?pageSize=9&pageNumber=1&sortBy=title&sortDirection=asc",
     "method": "GET",
     "sortNum": 712.9,
     "created": "2022-10-10T13:22:46.158Z",
-    "modified": "2022-10-10T17:50:49.016Z",
+    "modified": "2022-10-10T18:39:03.291Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "pageSize",
+        "value": "9",
+        "isPath": false
+      },
+      {
+        "name": "pageNumber",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "sortBy",
+        "value": "title",
+        "isPath": false
+      },
+      {
+        "name": "sortDirection",
+        "value": "asc",
+        "isPath": false
+      }
+    ],
     "auth": {
       "type": "basic",
       "basic": {
