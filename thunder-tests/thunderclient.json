@@ -72,11 +72,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "GET BLOGS BY ID",
-    "url": "http://127.0.0.1:9001/blogs/634166ac437c75cd7d9f7d68",
+    "url": "http://127.0.0.1:9001/blogs/63440e977ce9a11bbd32bf07",
     "method": "GET",
     "sortNum": 1093.8,
     "created": "2022-09-15T13:04:24.808Z",
-    "modified": "2022-10-08T12:03:12.954Z",
+    "modified": "2022-10-10T12:23:09.163Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -165,12 +165,12 @@
     "method": "POST",
     "sortNum": 1015.6,
     "created": "2022-10-02T18:49:43.509Z",
-    "modified": "2022-10-08T12:04:19.668Z",
+    "modified": "2022-10-10T12:11:53.132Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "  {\n        \"title\": \"string\",\n        \"shortDescription\": \"string\",\n        \"content\": \"string\",\n        \"blogId\": \"6341673bc1fd27a2b352c346\"\n    }\n",
+      "raw": "  {\n        \"title\": \"string\",\n        \"shortDescription\": \"string\",\n        \"content\": \"string\",\n        \"blogId\": \"63440be6f45fa53532a18517\"\n    }\n",
       "form": []
     },
     "auth": {
@@ -274,11 +274,11 @@
     "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
     "containerId": "",
     "name": "POST BLOG POST",
-    "url": "http://127.0.0.1:9001/blogs/63416a9e0cf268837a4513d8/posts",
+    "url": "http://127.0.0.1:9001/blogs/63440e977ce9a11bbd32bf07/posts",
     "method": "POST",
     "sortNum": 976.5,
     "created": "2022-10-08T10:52:24.258Z",
-    "modified": "2022-10-08T12:28:29.736Z",
+    "modified": "2022-10-10T12:22:56.421Z",
     "headers": [],
     "params": [],
     "body": {

@@ -73,7 +73,6 @@ describe("/posts", () => {
         newPost.blogId = body.items[0].id
     })
     test('POST Post ', async () => {
-        console.log('newPost:', newPost);
         const { status, body } = await request(httpServerService.server)
 
             .post("/posts")
@@ -168,8 +167,6 @@ describe("/posts", () => {
         "content": "string2",
     }
     test('PUT Post ', async () => {
-        console.log("updatePost:", updatePost);
-
         const { status } = await request(httpServerService.server)
             .put(`/posts/${post?.id}`)
             .set('Authorization', 'Basic YWRtaW46cXdlcnR5')

@@ -270,8 +270,6 @@ describe("/blogs", () => {
                 "createdAt"
             ]
         }
-        console.log("body:", body);
-
         expect(status).toBe(201)
         expect(check(schema, body)).toBe(true)
         // post = body

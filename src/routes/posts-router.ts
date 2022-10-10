@@ -13,6 +13,7 @@ import { pageSizeQueryValidationMiddleware } from '../middlewares/pageSize-valid
 import { sortByBlogsQueryValidationMiddleware } from '../middlewares/sortByBlogs-validation-middleware';
 import { sortByPostsQueryValidationMiddleware } from '../middlewares/sortByPosts-validation-middleware';
 import { sortDirectionQueryValidationMiddleware } from '../middlewares/sortDirection-validation-middleware';
+import { bloggerBodyIdInBDValidationMiddleware } from '../middlewares/bloggerIdInBDBody-validation-middleware';
 import { blogIdBodyValidationMiddleware } from '../middlewares/blogId-body-validation-middleware';
 
 const mainRoute = 'posts'
@@ -31,6 +32,7 @@ export default function setRoutes(app: Express) {
         shortdescriptionBodyValidationMiddleware,
         contentBodyValidationMiddleware,
         blogIdBodyValidationMiddleware,
+        bloggerBodyIdInBDValidationMiddleware,
         checkValidationMiddleware,
         postsController.createOne)
 
@@ -46,6 +48,7 @@ export default function setRoutes(app: Express) {
         shortdescriptionBodyValidationMiddleware,
         contentBodyValidationMiddleware,
         blogIdBodyValidationMiddleware,
+        bloggerBodyIdInBDValidationMiddleware,
         checkValidationMiddleware,
         postsController.updateOne)
 

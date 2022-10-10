@@ -3,6 +3,7 @@
 1.0.2 feat:tests jest
 1.0.3 feat: + tests jest
 1.0.4 fix: tests midleware
+1.0.5 fix: bloggerId midleware
 
 
 

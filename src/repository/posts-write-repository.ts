@@ -14,8 +14,6 @@ class Service {
 
 
     async createOne(data: PostInputModel & { blogName: string }) {
-        console.log("data.blogId:", data.blogId);
-        console.log("await blogsReadRepository.readOne(data.blogId):", await blogsReadRepository.readOne(data.blogId));
 
         // const { name } = await blogsReadRepository.readOne(data.blogId)
         const element: PostViewModel = {
