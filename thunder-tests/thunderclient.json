@@ -48,7 +48,7 @@
     "method": "GET",
     "sortNum": 625,
     "created": "2022-09-15T13:04:24.807Z",
-    "modified": "2022-10-08T12:03:43.458Z",
+    "modified": "2022-10-10T13:03:50.695Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -294,5 +294,44 @@
       }
     },
     "tests": []
+  },
+  {
+    "_id": "2056b9cb-8a38-4805-b9ed-146c2edfe9a3",
+    "colId": "1574f710-2e42-4f13-a85a-9ca544736867",
+    "containerId": "",
+    "name": "GET BLOGS Pagination",
+    "url": "http://127.0.0.1:9001/blogs?pageSize=2&pageNumber=1",
+    "method": "GET",
+    "sortNum": 703.1,
+    "created": "2022-10-10T13:03:30.473Z",
+    "modified": "2022-10-10T13:04:07.537Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "pageSize",
+        "value": "2",
+        "isPath": false
+      },
+      {
+        "name": "pageNumber",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "admin",
+        "password": "qwerty"
+      }
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "schema",
+        "value": "{ \"type\": \"array\", \"items\": [ { \"type\": \"object\", \"properties\": { \"id\": { \"type\": \"integer\" }, \"canBeDownloaded\": { \"type\": \"boolean\" }, \"minAgeRestriction\": { \"type\": \"null\" }, \"createdAt\": { \"type\": \"string\" }, \"publicationDate\": { \"type\": \"string\" }, \"title\": { \"type\": \"string\" }, \"author\": { \"type\": \"string\" }, \"availableResolutions\": { \"type\": \"array\", \"items\": [ { \"type\": \"string\" } ] } }, \"required\": [ \"id\", \"canBeDownloaded\", \"minAgeRestriction\", \"createdAt\", \"publicationDate\", \"title\", \"author\", \"availableResolutions\" ] } ] }"
+      }
+    ]
   }
 ]
